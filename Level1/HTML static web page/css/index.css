@@ -1,0 +1,185 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+ul li {
+  list-style: none;
+}
+body {
+  background-color: #dedede;
+}
+
+/*清除浮动*/
+.clearfix:after,.clearfix:before {
+  content: '';
+  display: table;
+}
+.clearfix:after{
+  clear: both;
+}
+.clearfix{
+  zoom:1;
+}
+
+/*头部区*/
+.head-wrap .head {
+  background-color: #333;
+  height: 70px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+.head-wrap .head .n-left {
+  float: left;
+  width: 250px;
+  height: 100%;
+}
+.head-wrap .head .n-left img {
+  width: 227px;
+  height: 70px;
+}
+.head-wrap .head .n-right {
+  float: right;
+  line-height: 70px;
+}
+.head-wrap .head .n-right li {
+  float: left;
+  margin-right: 30px;
+}
+.head-wrap .head .n-right li a {
+  color: #fff;
+  vertical-align: center;
+}
+
+/* 内容区 */
+.content-wrap {
+  position: relative;
+  margin: 15px;
+}
+.content-wrap .content-left {
+  margin-right: 330px;
+  min-width: 600px;
+}
+.content-wrap .content-left .article,
+.content-wrap .content-left .img-list,
+.content-wrap .content-left .last {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+.content-wrap .content-left .article h1,
+.content-wrap .content-left .article h2,
+.content-wrap .content-left .last h1,
+.content-wrap .content-left .last h2,
+.content-wrap .content-left .article .author {
+  padding-bottom: 10px;
+}
+.content-wrap .content-left .article h2,
+.content-wrap .content-left .last h2,
+.content-wrap .content-left .last .author,
+.content-wrap .content-left .article .author {
+  color: #aaa;
+}
+.content-wrap .content-left .article p {
+  text-indent: 2em;
+}
+.content-wrap .content-left .article img {
+  margin: 20px 0;
+}
+.content-wrap .content-left .img-list,.content-wrap .content-left .last{
+  background-color: #fff;
+}
+.content-wrap .content-left .img-list li {
+  float: left;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+.content-wrap .content-left .img-list li img {
+  width: 150px;
+  height: 150px;
+}
+.content-wrap .content-left .last ol {
+  margin-left: 30px;
+  margin-bottom: 20px;
+}
+.content-wrap .content-left .last caption {
+  margin-bottom: 20px;
+}
+.content-wrap .content-left .last table {
+  margin-top: 10px;
+  width: 100%;
+}
+.content-wrap .content-left .last table th {
+  color: #fff;
+  background-color: #333;
+}
+.content-wrap .content-left .last table tfoot {
+  background-color: #eee;
+}
+.content-wrap .content-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-left: 30px;
+  width: 300px;
+  background-color: #fff;
+  padding: 5px;
+}
+.content-wrap .content-right h2 {
+  border-left: 3px solid #ccc;
+  padding-left: 9px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.content-wrap .content-right .right {
+  width: 32%;
+  display: inline-block;
+  font-size: 13px;
+  text-align: right;
+  margin-right: 20px;
+}
+.content-wrap .content-right .demand {
+  font-size: 12px;
+  color: #ccc;
+  margin-left: 120px;
+}
+.content-wrap .content-right input,
+.content-wrap .content-right .demand,
+.content-wrap .content-right select {
+  margin-bottom: 12px;
+}
+.content-wrap .content-right .describe {
+  text-align: top;
+}
+.content-wrap .content-right .multipline {
+  height: 70px;
+}
+.content-wrap .content-right .btn {
+  width: 100%;
+  height: 40px;
+  border: none;
+  background: #3355D0;
+  color: #fff;
+  border-radius: 5px;
+}
+.content-wrap .content-right .btn:hover {
+  background: #3330d0;
+}
+
+/*底部区*/
+.footer {
+  position: fix;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+}
