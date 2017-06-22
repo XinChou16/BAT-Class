@@ -1,0 +1,45 @@
+html body {
+  margin: 0;
+  padding: 0;
+}
+.clearfix:before,.clearfix:after {
+  content: '';
+  display: table;
+}
+.clearfix:after{
+  clear: both;
+}
+.clearfix{
+  zoom:1;
+}
+
+body{
+  /*margin: 200px;*/
+}
+.box{
+  background-color: #ccc;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,-50%);
+  width: 400px;
+  height: 200px;
+  overflow: hidden;
+}
+.box .circle{
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: #fc0;
+  border-radius: 50%;
+}
+
+.box .left{
+  top: -50px;
+  left: -50px;
+}
+
+.box .right{
+  right: -50px;
+  bottom: -50px;
+}

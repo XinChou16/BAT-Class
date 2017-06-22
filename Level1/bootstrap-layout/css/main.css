@@ -2,14 +2,17 @@
   margin: 0;
   padding: 0;
 }
-body {
-  /*box-sizing: border-box;*/
-}
-.clearfix {
+.clearfix:before,.clearfix:after {
   content: '';
   display: table;
+}
+.clearfix:after{
   clear: both;
 }
+.clearfix{
+  zoom:1;
+}
+
 .container{
   background-color: #ccc;
   width: 100%;
@@ -25,7 +28,7 @@ body {
   line-height: 50px;
   text-align: left;
 }
-@media (min-width: 769px){
+@media only screen and (min-width: 769px) and (max-width: 2000px){
   .col-lg-1{
     width: 8.333333%;
   }
@@ -45,7 +48,7 @@ body {
     width: 50%;
   }
 }
-@media (max-width: 768px){
+@media only screen and (max-width: 768px){
   .col-sm-1{
     width: 8.333333%;
   }
