@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.clearfix:after{
+  content:'';
+  display: block;
+  clear: both;
+}
+
+/* container area*/
+.container{
+  position: relative;
+  margin: 10px;
+  background-color: #dedede;
+  padding: 20px;
+  min-width: 800px;
+}
+
+/*left*/
+.container .c-left{
+  border: 1px solid #999;
+  width: 200px;
+  float: left;
+  margin-left: -100%;
+  background-color: #fff;
+}
+.container .c-left .logo {
+  float: left;
+  padding: 20px;
+}
+.container .c-left .logo img{
+  width: 80px;
+  height: 80px;
+}
+.container .c-left .name{
+  padding-top: 20px;
+}
+
+/*right*/
+.container .c-right{
+  border: 1px solid #999;
+  box-sizing: border-box;
+  width: 120px;
+  float: left;
+  margin-left: -120px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.container .c-right img{
+  width: 80px;
+  height: 80px;
+  padding-bottom: 20px;
+}
+
+
+/* middle*/
+.container .middle-wrap{
+  float: left;
+}
+.container .c-middle{
+  border: 1px solid #999;
+  margin-left: 240px;
+  margin-right: 160px;
+  padding: 20px;
+  background-color: #fff;
+}
+.container .c-middle .title,
+.container .c-middle .content{
+  margin-bottom: 20px;
+}
+.container .c-middle h2{
+  font-weight: 400;
+  font-size: 16px;
+}
+.container .c-middle p{
+  font-size: 12px;
+}
