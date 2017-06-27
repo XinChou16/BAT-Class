@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>冒泡排序</title>
+</head>
+<body>
+    
+
+ <script>
+     function bubbleSorting(arr) {
+         for (var i = 0; i < arr.length; i++) {
+             for (var j = 0; j < arr.length - i; j++) {
+                 if (arr[j] > arr[j+1]) {
+                     var temp = arr[j+1];
+                     arr[j+1] = arr[j];
+                     arr[j] = temp;
+                 }
+             }
+         }
+
+         return arr;
+     }
+
+     var testArr = [5,3,1,6,7,2,4,8];
+     console.log('原数组为 ' + testArr);
+     console.log('排序后的数组为 ' + bubbleSorting(testArr));
+ </script>   
+</body>
+</html>
