@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>选择排序算法</title>
+</head>
+<body>
+    
+
+ <script>
+     function chooseSorting(arr) {
+        var max,temp;
+
+        // 注意循环次数
+        for (var i = 0; i < arr.length; i++) {
+            max = i;
+            for (var j = i +1; j < arr.length; j++) {
+                if (arr[max] < arr[j]) {//也可以改成'>'，即实现升序排序
+                    max = j; //遇到比当前j更大的，就把新的最大max下标更改为当前j
+                }
+            }
+            // 使用缓存变量交换最大数与当前项i
+            temp= arr[max];
+            arr[max] = arr[i];
+            arr[i] = temp;
+        }
+
+         return arr;
+     }
+
+     var testArr = [5,3,1,6,7,2,4,8];
+
+     console.log('原数组为 ' + testArr);
+     console.log('排序后的数组为 ' + chooseSorting(testArr));
+ </script>   
+</body>
+</html>

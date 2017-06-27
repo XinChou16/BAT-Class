@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>快速排序</title>
+</head>
+<body>
+    
+
+ <script>
+     function fastSorting(arr) {
+        if (arr.length <= 1) {
+            return arr.slice(0);
+        }
+         var left = [];
+         var right = [];
+         var middle = [arr[0]];
+
+         for (var i = 1; i < arr.length; i++) {
+             if (arr[i] < middle[0]) {
+                 left.push(arr[i]);
+             }else{
+                  right.push(arr[i]);
+             }
+         }
+
+         return fastSorting(left).concat(middle.concat(fastSorting(right)));
+     }
+     
+     var testArr = [5,3,1,6,7,2,4,8];
+     console.log('原数组为 ' + testArr);
+     console.log('排序后的数组为 ' + fastSorting(testArr));
+ </script>   
+</body>
+</html>
