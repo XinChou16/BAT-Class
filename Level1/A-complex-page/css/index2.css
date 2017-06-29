@@ -1,5 +1,6 @@
 body {
   font: 12px/1.8 "微软雅黑";
+  color: #fff;
 }
 .clearfix:after {
   content: '';
@@ -17,12 +18,33 @@ body {
   display: block;
   width: 35px;
   height: 35px;
-  margin: 10px 0 10px 50px;
+  margin: 15px 0 10px 50px;
   background: url('../images/icon.png') no-repeat -47px -38px;
 }
-.navbar .form-control {
+.navbar #form-control {
   float: right;
   width: 312px;
   height: 27px;
+  margin: 10px 30px;
   border-radius: 156px;
+  outline: 0;
+}
+.navbar .search-btn {
+  display: inline-block;
+  position: relative;
+  left: 60px;
+  top: 17px;
+  width: 18px;
+  height: 18px;
+  background: url('../images/icon.png') no-repeat 0 0;
+}
+.navbar #fr {
+  position: absolute;
+  right: 150px;
+  margin-top: 5px;
+}
+.navbar #fr > a {
+  color: #fff;
+  margin-top: 2px;
+  display: inline-block;
 }
