@@ -6,10 +6,10 @@
   </head>
 <body>
 
-  <label>请输入北京今天空气质量：<input id="aqi-input" type="text"></label>
+  <label>请输入北京今天空气质量：<input id="inputAqi" type="text"></label>
   <button id="button">确认填写</button>
 
-  <div>您输入的值是：<span id="aqi-display">尚无录入</span></div>
+  <div>您输入的值是：<span id="renderAqi">尚无录入</span></div>
 
 <script type="text/javascript">
 
@@ -18,26 +18,17 @@
   在注释下方写下代码
   给按钮button绑定一个点击事件
   在事件处理函数中
-  获取aqi-input输入的值，并显示在aqi-display中
+  获取inputAqi输入的值，并显示在renderAqi中
   */
 
-  // 获取id的函数
+  // 获取节点
   function $(id){
     return document.getElementById(id);
   }
 
-  // 显示结果函数
-  function renderResult(result) {
-    $('aqi-display').innerHTML = $('aqi-input').value;//有个疑问，这个value方法是每个节点都有吗？如何查看不同节点下所具有的方法
+  $('button').onclick = function () {
+    $('renderAqi').innerHTML = $('inputAqi').value;
   }
-
-  // 给按钮绑定点击事件
-  function initEvent() {
-    $('button').addEventListener('click',renderResult,false);
-  }
-
-  // 执行函数
-  initEvent();
   
 })();
 

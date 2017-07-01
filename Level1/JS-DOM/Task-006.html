@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="description" content="IFE2016" />
+  <meta charset="utf-8">
+  <title>task-006查询-模糊匹配</title>
+  <style>
+    .control{
+      width: 220px;
+      height: 300px;
+      /*outline: 1px solid cyan;*/
+      margin-left: 50px;
+    }
+    button{
+      display: block;
+      width: 80px;
+      margin-top: 10px;
+      padding: 5px;
+      border: 0;
+      background-color: #3cc;
+      color: #fff;
+      text-align: center;
+      margin: 0 auto;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover{
+      background-color: #3cd;
+      color: #fff
+    }
+    li{
+    list-style: none;
+    background-color: #3cc;
+    display: inline-block;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 5px;
+    padding: 5px;
+    /*width: 20px;*/
+    }
+    #inputArea{
+      display: block;
+      width: 100%;
+      height: 100px;
+    }
+    #pairText{
+      width: 100%;
+      margin-bottom: 5px;
+    }
+    .container{
+      margin-left: 50px;
+    }
+    .container .highlight{
+      color: #f00;
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="control">
+    <textarea id="inputArea" ></textarea><br>
+    <button id="insertLeft">左插入</button><br>
+    <button id="insertRight">右插入</button><br>
+    <input type="text" id="pairText"> 
+    <button id="search">查询</button><br>
+  </div>
+  <ul id="container">
+    <!--<li>插入的内容</li>-->
+    <!--<li>我的1我的</li>
+    <li>我的2我的</li>
+    <li>我的3我的</li>-->
+  </ul>
+  
+<script>
+  var $ = function(id) {
+    return document.getElementById(id);
+  }
+  
+  var data = [];
+  // 点击插入按钮，插入内容到页面
+  var addCont = (function () {
+      // 输入框的值，不能初始化就传给一个变量！
+      var inputValue = $('inputArea');
+      var cont = $('container');
+      
+      $('insertLeft').onclick = function () {
+        pairInput(inputValue.value,'left');
+      }
+      $('insertRight').onclick = function () {
+        pairInput(inputValue.value,'right');
+      } 
+      $('search').onclick = function () {
+        highlighten();
+      } 
+      
+  })();
+
+  /**
+   * 对输入框的多个内容输入进行匹配
+   * 
+   */
+  function pairInput(value,direction){
+    var cont = $('container');
+    var reg = /\,|-|、|\n|\s/g;// 逗号需要转义
+    var valueArr = value.split(reg);
+    var input = $('inputArea');
+
+    for (var i = 0; i < valueArr.length; i++) {
+        if(direction == 'left'){
+            data.unshift(value);
+            console.log(data)
+        }else if(direction == 'right'){
+            data.push(value);
+        }
+        renderData(data);
+    }
+  }
+
+  /**
+   * 搜索到的字符高亮
+   * 判断是否存在带匹配的字符串
+   * 存在就把这个字符替换为span标签的元素，添加红色
+   * 但，连续匹配的话，之前的高亮显示不会消失，后面需要改进
+   */
+  function highlighten() {
+    var cont = $('container');
+    var lis = cont.getElementsByTagName('li');
+    var pairText = $('pairText');
+    // console.log(lis[0].innerText);
+
+    // 循环插入的li的文字内容，对其进行匹配处理
+    for (var i = 0; i < lis.length; i++) {
+        //查询每个li中是否存在待匹配的文字，若存在，则将该数字的innerHTML替换掉
+      if (lis[i].innerHTML.indexOf(pairText.value) != -1) {
+        var newli = lis[i].innerHTML.replace(pairText.value,'<span style="color:red;">'+pairText.value+'</span>')
+        lis[i].innerHTML = newli;
+      }
+    }
+  } 
+  
+    // 显示数据方法
+    function renderData(data){
+        var list = $('container');
+        var numHTML = '';
+
+        for (var i = 0; i < data.length; i++) {
+            numHTML += '<li>';
+            numHTML += data[i] +'</li>';
+        }
+
+        list.innerHTML = numHTML;
+    }
+</script>
+</body>
+</html>

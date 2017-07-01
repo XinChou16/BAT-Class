@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="description" content="IFE2016" />
+  <meta charset="utf-8">
+  <title>task-005排序</title>
+  <style>
+    li{
+    list-style: none;
+    background-color: #3cc;
+    display: inline-block;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 5px;
+    width: 20px;
+    font-size: 12px;
+}
+  </style>
+</head>
+<body>
+  <input type="text" id="input">
+  <input type="button" value="左侧入">
+  <input type="button" value="右侧入">
+  <input type="button" value="左侧出">
+  <input type="button" value="右侧出"><br>
+  <input type="button" value="排序">
+  <ul id="container">
+    
+    <!-- <li>1</li>
+    <li>2</li> -->
+    
+  </ul>
+  <script>
+    function $(id){
+      return document.getElementById(id);
+    }
+    var list = $('container');
+    var input = $('input');
+    var btns = document.getElementsByTagName('input');
+    var data = [];
+
+    // 添加节点
+    function insert(direction) {
+        if(input.value == ''){
+            alert('你还没输入哦~请输入数字~');
+            input.focus();//聚焦到输入框
+        }else if(/\D/g.test(input.value)){
+            alert('输入有误，只能输入数字');
+            input.value = '';
+            input.focus();
+        }else{
+          if(parseInt(input.value)<10 || parseInt(input.value)>100){
+            alert('请输入一个在10到100之间的数字');
+            input.value = '';
+            input.focus();
+          }else{
+            if(direction == 'left'){
+                data.unshift(input.value);
+            }else if(direction == 'right'){
+                data.push(input.value);
+            }
+            renderData(data);
+          }
+        }
+    }
+    // 移除节点
+    function del(node,direction) {
+        if(list.childNodes.length <= 0){
+          alert("请先输入数字哦~");
+          return false;
+        }else{
+            if (direction === 'left') {
+                alert("删除数字" + list.firstChild.innerText );
+                data.shift(input.value);
+            }else if(direction === 'right'){
+                alert("删除数字" + list.lastChild.innerText );
+                data.pop(input.value);
+            }else{
+                alert("删除数字" + list.removeChild(node).innerText );
+                data.splice(node,1);
+            }
+            renderData(data);
+        }
+    }
+
+    // 排序算法
+    function sort(arr) {
+      for (var i = 0; i < arr.length; i++) {
+         for (var j = 0; j < arr.length - 1; j++) {
+             if (arr[j] > arr[j+1]) {
+                 var temp = arr[j];
+                 arr[j] = arr[j+1];
+                 arr[j+1] = temp;
+             }
+         }
+      }
+      return arr;
+    }
+    // 显示数据方法
+    function renderData(num) {
+      var numList = $('container');
+      var numListHTML = '';
+      for (var i = 0; i < num.length; i++) {
+        numListHTML += '<li style="height: ';
+        numListHTML += num[i] +'px;">';
+        numListHTML += num[i] + '</li>';
+      }
+      numList.innerHTML = numListHTML;
+    }
+    // 添加绑定事件
+      btns[1].onclick = function(){insert('left');};
+      btns[2].onclick = function(){insert('right');};
+      btns[3].onclick = function(){del(-1,'left');};
+      btns[4].onclick = function(){del(-1,'right');};
+      btns[5].onclick = function(){renderData(sort(data))};
+      list.onclick = function(){del(event.target);};
+    
+  </script>
+</body>
+</html>

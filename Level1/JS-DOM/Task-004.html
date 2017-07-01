@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--
+任务四：基础JavaScript练习（一）
+任务描述
+如图，模拟一个队列，队列的每个元素是一个数字，初始队列为空
+有一个input输入框，以及4个操作按钮
+点击"左侧入"，将input中输入的数字从左侧插入队列中；
+点击"右侧入"，将input中输入的数字从右侧插入队列中；
+点击"左侧出"，读取并删除队列左侧第一个元素，并弹窗显示元素中数值；
+点击"右侧出"，读取并删除队列又侧第一个元素，并弹窗显示元素中数值；
+点击队列中任何一个元素，则该元素会被从队列中删除
+-->
+<html>
+<head>
+  <meta name="description" content="IFE2016" />
+  <meta charset="utf-8">
+  <title>task_2_4</title>
+<style>
+li{
+  list-style: none;
+  background-color: #3cc;
+  display: inline-block;
+  padding: 15px;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 5px;
+}
+</style>
+</head>
+<body>
+  <input type="text" id="input">
+  <input type="button" value="左侧入">
+  <input type="button" value="右侧入">
+  <input type="button" value="左侧出">
+  <input type="button" value="右侧出">
+  <ul id="container">
+    
+    <!-- <li>1</li>
+    <li>2</li> -->
+    
+  </ul>
+<script id="jsbin-javascript">
+function $(id){
+  return document.getElementById(id);
+}
+var list = $('container');
+var input = $('input');
+var btns = document.getElementsByTagName('input');
+// 保存数据
+var data = [];
+
+// 添加节点方法
+function insert(direction) {
+    if(input.value == ''){
+        alert('你还没输入哦~请输入数字~');
+        input.focus();//聚焦到输入框
+    }else if(/\D/g.test(input.value)){
+        alert('输入有误，只能输入数字');
+        input.value = '';
+        input.focus();
+    }else{
+        if(direction == 'left'){
+            data.unshift(input.value);
+        }else if(direction == 'right'){
+            data.push(input.value);
+        }
+        renderData(data);
+    }
+}
+
+// 移除节点方法
+function del(node,direction) {
+    if(list.childNodes.length <= 0){
+      alert("请先输入数字哦~");
+      return false;
+    }else{
+        if (direction === 'left') {
+            alert("删除数字" + list.firstChild.innerText );
+            data.shift(input.value);
+        }else if(direction === 'right'){
+            alert("删除数字" + list.lastChild.innerText );
+            data.pop(input.value);
+        }else{
+            alert("删除数字" + list.removeChild(node).innerText );
+            data.splice(node,1);
+        }
+        renderData(data);
+    }
+}
+
+// 显示数据方法
+function renderData(data){
+    var numHTML = '';
+
+    for (var i = 0; i < data.length; i++) {
+        numHTML += '<li>';
+        numHTML += data[i] +'</li>';
+    }
+
+    list.innerHTML = numHTML;
+}
+
+  btns[1].onclick = function(){insert('left');};
+  btns[2].onclick = function(){insert('right');};
+  btns[3].onclick = function(){del(-1,'left');};
+  btns[4].onclick = function(){del(-1,'right');};
+  list.onclick = function(){del(event.target);};
+</script>
+</body>
+</html>
