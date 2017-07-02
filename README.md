@@ -1,4 +1,6 @@
 # BAT-Class
-GOAL-BAT
 
-[bootstrap live preview](https://xinchou16.github.io/BAT-Class/bootstrap.html)
+## Level 百度前端项目
+
+- HTML + CSS静态页面
+- 三栏式布局
