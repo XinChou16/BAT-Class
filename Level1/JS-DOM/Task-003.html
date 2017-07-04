@@ -33,76 +33,83 @@
 
   <button id="btnSort">排序</button>
   <script type="text/javascript">
-    /**
-    * getData方法
-    * 读取id为source的列表，获取其中城市名字及城市对应的空气质量
-    * 返回一个数组，格式见函数中示例
-    */
-    function $(id) {
-      return document.getElementById(id);
+(function (window,document) {
+    function SortCity(ids){
+        if (!(this instanceof SortCity)) {
+            return new SortCity(ids);
+        }
+
+        this.data = [];
+        this.html = '';
+        this.length = document.getElementsByTagName(ids[0]).length;
+        this.cityList = document.getElementsByTagName(ids[0]);
+        this.quality = document.getElementsByTagName(ids[1]);
+        this.resort = document.getElementById(ids[2]);
+        this.btn = document.getElementById(ids[3]);
+        this.source = document.getElementById(ids[4]);
+        this.order = ['一', '二', '三', '四', '五', '六', '七',];
+
+        this.init();
     }
 
-    function getData() {
-      var data = [];
-      var length = document.getElementsByTagName('li').length;
+    SortCity.prototype = {
+        init:function () {
+           var self = this;
+           this.btn.onclick = function(){
+                var aqiData = self.getData();//从页面上获取数据
+                aqiData = self.sortUp(aqiData);//数据排序
+                self.render(aqiData);//显示数据
+                this.disabled=true;//禁用按钮
+                self.source.style.display = 'none';//隐藏原始数据
+           }
+        },
+        /**
+        * getData方法
+        * 读取id为source的列表，获取其中城市名字及城市对应的空气质量
+        * 返回一个数组，格式见函数中示例
+        */
+        getData: function () {
+            for (var i = 0; i < this.length; i++) {
+                // 保存城市名和空气质量到数组
+                this.data.push([this.cityList[i].innerHTML.slice(0, 2),parseInt(this.quality[i].innerHTML)]);
+            }
+            return this.data;
+        },
+        /**
+        * render(data)
+        * 将排好序的城市及空气质量指数，输出显示到id位resort的列表中
+        * 格式见ul中的注释的部分
+        */
+        render: function (data) {
+            for (var i = 0; i < this.length; i++) {
+                this.html += "<li>第" + this.order[i];
+                this.html += "名： " + data[i][0];
+                this.html += "空气质量：<b>" + data[i][1];
+                this.html += "</b></li>";
+            }
+            this.resort.innerHTML = this.html;
+        },
+        // 排序算法 - 升序排序
+        sortUp: function (arr) {
+            for (var i = 0; i < arr.length; i++) {
+                for (var j = 0; j < arr.length - 1; j++) {
+                    if ( arr[j][1] > arr[j+1][1] ) {
+                        var temp = arr[j+1];
+                        arr[j+1] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
 
-      for (var i = 0; i < length; i++) {
-        //   获取城市名和空气质量
-        var cityList = document.getElementsByTagName('li')[i].innerHTML.slice(0, 2);
-        var quality = parseInt(document.getElementsByTagName('b')[i].innerHTML);
+            return arr;
+        }
         
-        // 保存城市名和空气质量到数组
-        data.push([cityList, quality]);
-      }
-      //   console.log(data)
-      return data;
-    }
+    };
 
-    /**
-    * render(data)
-    * 将排好序的城市及空气质量指数，输出显示到id位resort的列表中
-    * 格式见ul中的注释的部分
-    */
-    function render(data) {
-      var length = document.getElementsByTagName('li').length;
-      var order = ['一', '二', '三', '四', '五', '六', '七',];
-      var html = '';
+    window.SortCity = SortCity;
+})(window,document);
 
-      for (var i = 0; i < length; i++) {
-        html += "<li>第" + order[i];
-        html += "名： " + data[i][0];
-        html += "空气质量：<b>" + data[i][1];
-        html += "</b></li>";
-      }
-
-      $('resort').innerHTML = html;
-    }
-
-    // 排序算法 - 升序排序
-    function sort(arr) {
-      for (var i = 0; i < arr.length; i++) {
-          for (var j = 0; j < arr.length - 1; j++) {
-
-              if ( arr[j][1] > arr[j+1][1] ) {
-                  var temp = arr[j+1];
-                  arr[j+1] = arr[j];
-                  arr[j] = temp;
-              }
-          }
-      }
-
-      return arr;
-    } 
-
-    // 在这下面给btnSort绑定一个点击事件，点击时触发btnHandle函数
-    $('btnSort').onclick = function() {
-      var aqiData = getData();//从页面上获取数据
-      aqiData = sort(aqiData);//数据排序
-      render(aqiData);//显示数据
-      this.disabled=true;//禁用按钮
-      $('source').style.display = 'none';//隐藏原始数据
-    }
-    
+SortCity(['li','b','resort','btnSort','source']);
   </script>
 </body>
 

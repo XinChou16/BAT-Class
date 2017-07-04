@@ -3,34 +3,58 @@
   <head>
     <meta charset="utf-8">
     <title>IFE JavaScript Task 01</title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+      body{
+        margin-top:20px;
+      }
+      #button,.displayArea{
+        margin-top:10px;
+      }
+    </style>
   </head>
 <body>
-
-  <label>请输入北京今天空气质量：<input id="inputAqi" type="text"></label>
-  <button id="button">确认填写</button>
-
-  <div>您输入的值是：<span id="renderAqi">尚无录入</span></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+          <p>请输入北京今天空气质量：</p><input id="inputAqi" type="text" class="form-control">
+          <button id="button" class="btn btn-info">确认填写</button>
+          <div class="displayArea">您输入的值是：<span id="renderAqi">尚无录入</span></div>
+      </div>
+    </div>
+  </div>
+  
 
 <script type="text/javascript">
 
-(function() {
-  /*
-  在注释下方写下代码
-  给按钮button绑定一个点击事件
-  在事件处理函数中
-  获取inputAqi输入的值，并显示在renderAqi中
-  */
+(function(window,document){
+    function TextShow(ids){
+    	if(!(this instanceof TextShow))
+    	  	return new TextShow(ids);
 
-  // 获取节点
-  function $(id){
-    return document.getElementById(id);
-  }
+    	this.input = document.getElementById(ids[0]);
+	    this.span = document.getElementById(ids[1]);
+	    this.btn = document.getElementById(ids[2]);
+	    this.init();
+    };
 
-  $('button').onclick = function () {
-    $('renderAqi').innerHTML = $('inputAqi').value;
-  }
-  
-})();
+    TextShow.prototype = {
+    	init:function(){
+    		var self= this;
+			this.btn.addEventListener('click',function(){
+				self.render();
+			},false);
+    	},
+    	render:function(){
+    		 this.span.innerHTML = this.input.value;
+    	}
+    };
+
+    window.TextShow = TextShow;
+}(window,document));
+
+TextShow(["inputAqi","renderAqi","button"]);
+
 
 </script>
 </body>
