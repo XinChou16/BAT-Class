@@ -54,14 +54,13 @@
 
     SortCity.prototype = {
         init:function () {
-           var self = this;
-           this.btn.onclick = function(){
-                var aqiData = self.getData();//从页面上获取数据
-                aqiData = self.sortUp(aqiData);//数据排序
-                self.render(aqiData);//显示数据
+           this.btn.onclick = (function(){
+                var aqiData = this.getData();//从页面上获取数据
+                aqiData = this.sortUp(aqiData);//数据排序
+                this.render(aqiData);//显示数据
                 this.disabled=true;//禁用按钮
-                self.source.style.display = 'none';//隐藏原始数据
-           }
+                this.source.style.display = 'none';//隐藏原始数据
+           }).bind(this)
         },
         /**
         * getData方法

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>IFE JavaScript Task 01</title>
-		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
     <style>
       body{
         margin-top:20px;
@@ -40,10 +40,9 @@
 
     TextShow.prototype = {
     	init:function(){
-    		var self= this;
-			this.btn.addEventListener('click',function(){
-				self.render();
-			},false);
+        this.btn.addEventListener('click',(function(){
+          this.render();
+        }).bind(this),false);//使用bind方法改变this指向
     	},
     	render:function(){
     		 this.span.innerHTML = this.input.value;
