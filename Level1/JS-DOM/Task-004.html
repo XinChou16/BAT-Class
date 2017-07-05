@@ -40,71 +40,87 @@ li{
     
   </ul>
 <script id="jsbin-javascript">
-function $(id){
-  return document.getElementById(id);
-}
-var list = $('container');
-var input = $('input');
-var btns = document.getElementsByTagName('input');
-// 保存数据
-var data = [];
-
-// 添加节点方法
-function insert(direction) {
-    if(input.value == ''){
-        alert('你还没输入哦~请输入数字~');
-        input.focus();//聚焦到输入框
-    }else if(/\D/g.test(input.value)){
-        alert('输入有误，只能输入数字');
-        input.value = '';
-        input.focus();
-    }else{
-        if(direction == 'left'){
-            data.unshift(input.value);
-        }else if(direction == 'right'){
-            data.push(input.value);
+(function (window,document) {
+    function insertNum(ids){
+        if (!(this instanceof insertNum)) {
+            return new insertNum(ids);
         }
-        renderData(data);
-    }
-}
 
-// 移除节点方法
-function del(node,direction) {
-    if(list.childNodes.length <= 0){
-      alert("请先输入数字哦~");
-      return false;
-    }else{
-        if (direction === 'left') {
-            alert("删除数字" + list.firstChild.innerText );
-            data.shift(input.value);
-        }else if(direction === 'right'){
-            alert("删除数字" + list.lastChild.innerText );
-            data.pop(input.value);
-        }else{
-            alert("删除数字" + list.removeChild(node).innerText );
-            data.splice(node,1);
+        this.data = [];
+        this.list = document.getElementById(ids[0])
+        this.input = document.getElementById(ids[1])
+        this.btns = document.getElementsByTagName(ids[1])
+
+        this.init();
+    }
+
+    insertNum.prototype = {
+        init:function () {
+            var self = this;
+            this.btns[1].onclick = function(){self.insert('left');};
+            this.btns[2].onclick = function(){self.insert('right');};
+            this.btns[3].onclick = function(){self.del(-1,'left');};
+            this.btns[4].onclick = function(){self.del(-1,'right');};
+            this.list.onclick = function(){self.del(event.target);};
+        },
+
+        // 添加节点方法
+        insert: function (direction) {
+            if(this.input.value == ''){
+                alert('你还没输入哦~请输入数字~');
+                this.input.focus();//聚焦到输入框
+            }else if(/\D/g.test(this.input.value)){
+                alert('输入有误，只能输入数字');
+                this.input.value = '';
+                this.input.focus();
+            }else{
+                if(direction == 'left'){
+                    this.data.unshift(this.input.value);
+                }else if(direction == 'right'){
+                    this.data.push(this.input.value);
+                }
+                this.renderData(this.data);
+            }
+        },
+
+        // 移除节点方法
+        del: function (node,direction) {
+            if(this.list.childNodes.length <= 0){
+                alert("请先输入数字哦~");
+                return false;
+            }else{
+                if (direction === 'left') {
+                    alert("删除数字" + this.list.firstChild.innerText );
+                    this.data.shift(input.value);
+                }else if(direction === 'right'){
+                    alert("删除数字" + this.list.lastChild.innerText );
+                    this.data.pop(input.value);
+                }else{
+                    alert("删除数字" + this.list.removeChild(node).innerText );
+                    this.data.splice(node,1);
+                }
+                this.renderData(this.data);
+            }
+        },
+
+        // 显示数据方法
+        renderData: function (data) {
+            var numHTML = '';
+
+            for (var i = 0; i < data.length; i++) {
+                numHTML += '<li>';
+                numHTML += data[i] +'</li>';
+            }
+
+            this.list.innerHTML = numHTML;
         }
-        renderData(data);
-    }
-}
+        
+    };
 
-// 显示数据方法
-function renderData(data){
-    var numHTML = '';
+    window.insertNum = insertNum;
+})(window,document);
 
-    for (var i = 0; i < data.length; i++) {
-        numHTML += '<li>';
-        numHTML += data[i] +'</li>';
-    }
-
-    list.innerHTML = numHTML;
-}
-
-  btns[1].onclick = function(){insert('left');};
-  btns[2].onclick = function(){insert('right');};
-  btns[3].onclick = function(){del(-1,'left');};
-  btns[4].onclick = function(){del(-1,'right');};
-  list.onclick = function(){del(event.target);};
+insertNum(['container','input']);
 </script>
 </body>
 </html>
