@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>表单操作</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css" >
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+<div class="container">
+    <div class="row table">
+        <div class="col-md-3 text-left center">
+           <div class="input-group websites">
+            <span class="input-group-addon " id="basic-addon2">网站</span>
+            <input type="text" class="form-control website" placeholder="输入主域名" aria-describedby="basic-addon2" >
+            <span class="input-group-addon" id="basic-addon2">.com</span>
+        </div>
+           <div class="input-group libs">
+            <span class="input-group-addon" id="basic-addon2">包含的库</span>
+            <input type="text" class="form-control lib" placeholder="输入库名" aria-describedby="basic-addon2">
+            
+        </div>
+            <button type="button" id="btn" class="btn btn-info">查询</button>
+        </div>
+    </div>
+</div>
+
+<script src="./js/jquery-1.7.1.min.js"></script>
+<script src="./js/index.js"></script>
+</body>
+</html>
